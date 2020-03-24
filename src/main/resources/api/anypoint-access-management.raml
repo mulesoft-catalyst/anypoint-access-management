@@ -1,0 +1,60 @@
+#%RAML 1.0
+title: anypoint-access-management
+version: v1
+description: Anypoint Access Management API to create custom Roles and Environments on the Anypoint Platform
+
+baseUri: http://localhost:8081/api/access-management/v1
+
+/environments:
+  post:
+    headers:
+      username:
+        type: string
+        description: username to login to anypoint platform
+      password:
+        type: string
+        description: password to login to anypoint platform
+      organizationName:
+        type: string
+        description: name of the anypoint platform organization
+      nonProdEnvironments:
+        type: string
+        description: non prod environments seperated by comma
+        examples:
+          example1: DEV
+          example2: DEV, QA, UAT 
+      prodEnvironments:
+        type: string
+        description: prod environments seperated by comma
+        examples: 
+          example1: PRD
+          example2: PRD1, PRD2
+    responses:
+      201:
+
+/roles:
+  post:
+    headers:
+      username:
+        type: string
+        description: username to login to anypoint platform
+      password:
+        type: string
+        description: password to login to anypoint platform
+      organizationName:
+        type: string
+        description: name of the anypoint platform organization
+      nonProdEnvironments:
+        type: string
+        description: non prod environments seperated by comma
+        examples:
+          example1: DEV
+          example2: DEV, QA, UAT 
+      prodEnvironments:
+        type: string
+        description: prod environments seperated by comma
+        examples: 
+          example1: PRD
+          example2: PRD1, PRD2
+    responses:
+      201:       

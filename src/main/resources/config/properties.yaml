@@ -1,0 +1,21 @@
+api:
+  basepath: "/api/access-management/v1"
+  
+http:
+  host: "0.0.0.0"
+  port: "8081"
+  
+platformApi:
+  host: "anypoint.mulesoft.com"
+  port: "443"
+  requestUri:
+    login: "/accounts/login"
+    logout: "/accounts/api/logout"
+    organization: "/accounts/api/profile"
+    roleGroups: "/accounts/api/organizations/{orgId}/rolegroups"
+    roles: "/accounts/api/organizations/{orgId}/rolegroups/{roleGroupId}/roles"
+    environments: "/accounts/api/organizations/{orgId}/environments"
+  retry: 
+    maxRetries: "5"
+    retryIntervalInMilliSec: "1000"
+  

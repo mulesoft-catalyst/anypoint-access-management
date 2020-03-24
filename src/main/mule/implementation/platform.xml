@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="anypoint-platform:loginSubFlow" doc:id="606e438a-5ea9-4e78-8d14-f5b519cd1f00">
+		<logger level="INFO" doc:name="Logger" doc:id="16fea729-6b91-4393-8b8f-91b173f3ac3c"
+			message="================================== Start -&gt; Platform API function (POST) : login ================================== " />
+		<until-successful maxRetries="${platformApi.retry.maxRetries}" doc:name="Until Successful"
+			doc:id="5f1bbf8d-3536-4a3c-95f0-5082df250734" millisBetweenRetries="${platformApi.retry.retryIntervalInMilliSec}">
+			<http:request method="POST" doc:name="login" doc:id="0ce0c02c-6569-4a1b-a57b-ab12134187ef"
+				config-ref="Anypoint_Platform_HTTP_Request_configuration" path="${platformApi.requestUri.login}" />
+		</until-successful>
+		<logger level="INFO" doc:name="Logger" doc:id="e52edbeb-c185-4707-8104-e75e0002a5a5"
+			message="================================== End -&gt; Platform API function (POST) : login ================================== " />
+	</sub-flow>
+	<sub-flow name="anypoint-platform:getOrganizationSubFlow" doc:id="34d002c7-c17a-4152-8e52-c507adb3cce0">
+		<logger level="INFO" doc:name="Logger" doc:id="c58eb9a0-84a3-4ec5-97bc-237728646fef"
+			message="================================== Start -&gt; Platform API function (GET) : organization ================================== " />
+		<until-successful maxRetries="${platformApi.retry.maxRetries}" doc:name="Until Successful"
+			doc:id="bbb3e62e-f8e2-48e2-883b-01ee8e6b123b" millisBetweenRetries="${platformApi.retry.retryIntervalInMilliSec}">
+			<http:request method="GET" doc:name="organization" doc:id="506d5b7d-ebec-49cc-9116-17440f790bdd"
+				config-ref="Anypoint_Platform_HTTP_Request_configuration" path="${platformApi.requestUri.organization}">
+				<http:headers><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.authorizationToken
+}]]]></http:headers>
+			</http:request>
+		</until-successful>
+		<logger level="INFO" doc:name="Logger" doc:id="224307c5-6f6f-4ad5-a33a-a672aad1a7e1"
+			message="================================== End -&gt; Platform API function (GET) : organization ================================== " />
+	</sub-flow>
+	<sub-flow name="anypoint-platform:createRoleGroupSubFlow" doc:id="3b0ae653-9249-4838-8302-9905b45901bc">
+		<logger level="INFO" doc:name="Logger" doc:id="153a4e7b-15a0-4f25-bea9-c6d6707287f0"
+			message="================================== Start -&gt; Platform API function (POST) : roleGroup ================================== " />
+		<http:request method="POST" doc:name="Create RoleGroup" doc:id="d5fe1349-db79-4594-b1cb-7fcb410433c3" config-ref="Anypoint_Platform_HTTP_Request_configuration" path="${platformApi.requestUri.roleGroups}">
+				<http:headers><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.authorizationToken
+}]]]></http:headers>
+				<http:uri-params><![CDATA[#[output application/java
+---
+{
+	"orgId" : vars.orgId
+}]]]></http:uri-params>
+			</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="63e34338-1703-440a-82c6-3e0f39e5a228"
+			message="================================== End -&gt; Platform API function (POST) : roleGroup ================================== " />
+	</sub-flow>
+	<sub-flow name="anypoint-platform:createRolesSubFlow" doc:id="916049d1-c1d7-4086-a3da-06ece36832eb">
+		<logger level="INFO" doc:name="Logger" doc:id="4c095a67-d89e-408a-adc3-043034cc35f4"
+			message="================================== Start -&gt; Platform API function (POST) : roles ================================== " />
+		<http:request method="POST" doc:name="Create Roles" doc:id="0fe3f5c4-8fc1-4ad0-a40b-b0f05b397afb" config-ref="Anypoint_Platform_HTTP_Request_configuration" path="${platformApi.requestUri.roles}" outputMimeType="application/json">
+				<http:headers><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.authorizationToken
+}]]]></http:headers>
+				<http:uri-params><![CDATA[#[output application/java
+---
+{
+	"roleGroupId" : vars.roleGroupId,
+	"orgId" : vars.orgId
+}]]]></http:uri-params>
+			</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="40691eab-b0fa-4df1-86c2-ad5851a9544a"
+			message="================================== End -&gt; Platform API function (POST) : roles ================================== " />
+	</sub-flow>
+	<sub-flow name="anypoint-platform:getEnvironmentsSubFlow" doc:id="7e618cc0-17fc-4a9f-83c5-a5b0b1631d3c">
+		<logger level="INFO" doc:name="Logger" doc:id="ca0d97ef-a6cf-4bf1-b13c-487f28a7978d"
+			message="================================== Start -&gt; Platform API function (GET) : environments ================================== " />
+		<until-successful maxRetries="${platformApi.retry.maxRetries}" doc:name="Until Successful"
+			doc:id="69f90d0e-8a3b-4b1a-b3fd-64060bfcb2e1" millisBetweenRetries="${platformApi.retry.retryIntervalInMilliSec}">
+			<http:request method="GET" doc:name="environments" doc:id="aef92fdd-cf4c-4801-9153-90d67edbaf28"
+				config-ref="Anypoint_Platform_HTTP_Request_configuration" path="${platformApi.requestUri.environments}">
+				<http:headers><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.authorizationToken
+}]]]></http:headers>
+				<http:uri-params><![CDATA[#[output application/java
+---
+{
+	"orgId" : vars.orgId
+}]]]></http:uri-params>
+			</http:request>
+		</until-successful>
+		<logger level="INFO" doc:name="Logger" doc:id="f2ec7ef7-f273-42ec-9f4d-4b6aead9b565"
+			message="================================== End -&gt; Platform API function (GET): environments ================================== " />
+	</sub-flow>
+	<sub-flow name="anypoint-platform:createEnvironmentsSubFlow" doc:id="d7abfabe-d09d-4d9b-9863-4c864fe4524e">
+		<logger level="INFO" doc:name="Logger" doc:id="a06526be-a788-41a9-a770-c04cda47b869"
+			message="================================== Start -&gt; Platform API function (POST) : environments ================================== " />
+		<http:request method="POST" doc:name="Create Environments" doc:id="9652bc22-ceb4-433e-a08d-deab4bbe8a04" config-ref="Anypoint_Platform_HTTP_Request_configuration" path="${platformApi.requestUri.environments}">
+				<http:headers><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.authorizationToken
+}]]]></http:headers>
+				<http:uri-params><![CDATA[#[output application/java
+---
+{
+	"orgId" : vars.orgId
+}]]]></http:uri-params>
+			</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="5bbd8ebd-7eec-42b9-8ce6-1d7af2034ea5"
+			message="================================== End -&gt; Platform API function (POST): environments ================================== " />
+	</sub-flow>
+	<sub-flow name="anypoint-platform:logoutSubFlow" doc:id="e22199ae-f890-49f4-8c83-9aca97d27345">
+		<logger level="INFO" doc:name="Logger" doc:id="05dc482c-56cd-4fa5-82a8-8f7046d2c90a"
+			message="================================== Start -&gt; Platform API function (GET) : logout ================================== " />
+		<until-successful maxRetries="${platformApi.retry.maxRetries}" doc:name="Until Successful"
+			doc:id="8e10c2ed-f2b1-4cb0-9e35-4bf6355980a5" millisBetweenRetries="${platformApi.retry.retryIntervalInMilliSec}">
+			<http:request method="GET" doc:name="logout" doc:id="b551a79e-cc3c-4212-8ba1-9a9ef96b2b64"
+				config-ref="Anypoint_Platform_HTTP_Request_configuration" path="${platformApi.requestUri.logout}">
+				<http:headers><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.authorizationToken
+}]]]></http:headers>
+			</http:request>
+		</until-successful>
+		<logger level="INFO" doc:name="Logger" doc:id="5ac8e2c7-9301-47a3-b4dd-6c23bc911cb8"
+			message="================================== End -&gt; Platform API function (GET) : logout ================================== " />
+	</sub-flow>
+</mule>

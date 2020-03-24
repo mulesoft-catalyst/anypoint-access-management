@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="environments:mainFlow" doc:id="0730420b-ca82-4044-afbe-1e7e104d688e" >
+		<flow-ref doc:name="loginSubFlow" doc:id="b8d4d52a-3aee-4b80-8dae-96f1218f58a5" name="common:loginSubFlow" />
+		<flow-ref doc:name="getOrganizationSubFlow" doc:id="81f5f773-d995-4e7f-94d8-ba01c58364f6" name="common:getOrganizationSubFlow" />
+		<flow-ref doc:name="createEnvironmentsSubFlow" doc:id="fba8e676-8277-441a-b2a1-b18060575867" name="environments:createEnvironmentsSubFlow"/>
+		<flow-ref doc:name="logoutSubFlow" doc:id="f6519af8-2927-47be-b83e-f97b7cc4bb46" name="anypoint-platform:logoutSubFlow"/>
+		<set-payload value="#[null]" doc:name="Set Payload to null" doc:id="5a3864f2-67b4-41c5-b775-fbcf08173dfa" />
+	</sub-flow>
+	<sub-flow name="environments:createEnvironmentsSubFlow" doc:id="dee1c3bb-0316-4462-90b5-adfa70882444" >
+		<ee:transform doc:name="Create Environments request" doc:id="6c3a9a35-78d1-4fd4-aab2-3ba911da30ca" >
+			<ee:message >
+				<ee:set-payload resource="dwl/environments/set-payload-create-environments-request.dwl" />
+			</ee:message>
+		</ee:transform>
+		<foreach doc:name="For Each Environment" doc:id="e5b001ba-619b-428b-8121-f9b418bc55a6" >
+			<flow-ref doc:name="createEnvironments" doc:id="14d3d54b-3b58-4311-a307-287c854e9bac" name="anypoint-platform:createEnvironmentsSubFlow"/>
+		</foreach>
+	</sub-flow>
+</mule>

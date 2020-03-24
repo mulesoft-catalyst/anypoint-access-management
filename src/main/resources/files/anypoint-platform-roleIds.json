@@ -1,0 +1,172 @@
+[
+	{
+		"Category": "API Manager",
+		"Permission": "API Manager Environment Administrator",
+		"RoleId": "f14b0d23-a267-4014-9563-29d46a26295b"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "Deploy API proxies",
+		"RoleId": "67ff49cb-6774-49de-92aa-95e0dd525b3d"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "Manage API Alerts",
+		"RoleId": "c4662f0f-31fc-4791-9493-97a6e7ea261a"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "Manage API Configuration",
+		"RoleId": "2ee11112-51ca-47a8-b4ae-a6bb6e7e5573"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "Manage Contracts",
+		"RoleId": "be26fe60-0cc9-4b9a-bf20-5b12a6aa34e1"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "Manage Policies",
+		"RoleId": "456f139c-39e2-48c4-80b5-5205cb6b8ae2"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "View API Alerts",
+		"RoleId": "5a46e86c-7a28-424b-84a9-20021b1ec626"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "View API Configuration",
+		"RoleId": "8856c1b1-37cf-4f12-a02d-f36ce1a96a93"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "View Contracts",
+		"RoleId": "1660b07a-8920-4091-8292-1f42f35e92e4"
+	},
+	{
+		"Category": "API Manager",
+		"Permission": "View Policies",
+		"RoleId": "b979af78-664f-4ca2-8fd6-d8355fa09dc3"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "CloudHub NW Administrator",
+		"RoleId": "177750b0-9407-4261-92b5-93e772c8ea84"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "CloudHub NW Viewer",
+		"RoleId": "bcd24100-7cf8-4a03-ae21-bd505d36f8c1"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Runtime Fabrics",
+		"RoleId": "c3b47c87-bc83-4748-8f17-076354be7808"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Create Applications",
+		"RoleId": "3c91e5ca-fe58-441f-b6ab-a2be0a684bbf"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Delete Applications",
+		"RoleId": "4b3b5050-2f33-4740-9b63-dccc421b9f92"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Download applications",
+		"RoleId": "4e2a978e-0c79-4131-bebf-a653fd8ba039"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Alerts",
+		"RoleId": "26500650-0fd6-4045-aa5f-8c749ce278e4"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Application Data",
+		"RoleId": "51de3390-9bfe-4bcc-a790-6016b820ba92"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Queues",
+		"RoleId": "9c459fa4-3259-4204-951f-a0d26fe87eef"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Runtime Fabrics",
+		"RoleId": "3b8fefa5-f939-44f3-ae19-d154b89de45d"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Schedules",
+		"RoleId": "009b5d47-e107-4375-91c0-62ddac10abac"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Servers",
+		"RoleId": "53823f29-6e57-4c42-acdb-e42a881a888f"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Settings",
+		"RoleId": "4db01de7-89db-473e-8591-606204e9baab"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Tenants",
+		"RoleId": "c4034ae3-f65f-4d0a-9047-4288dedaedd6"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Read Alerts",
+		"RoleId": "7294cfe6-4009-44e9-902d-0c9e9897b9a5"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Read Applications",
+		"RoleId": "674c9f7a-ee81-44d7-b25f-eb938d8e69b1"
+	},
+	{
+		"Category": "Runtime Manager",
+		"Permission": "Read Servers",
+		"RoleId": "8b7caaba-e94a-11e4-b02c-1681e6b88ec1"
+	},
+	{
+		"Category": "Design Center",
+		"Permission": "Design Center Developer",
+		"RoleId": "861c23bb-c3e0-4ab9-b6b4-db2325a1bb1d"
+	},
+	{
+		"Category": "Anypoint Monitoring",
+		"Permission": "Anypoint Monitoring User",
+		"RoleId": "8f77b09c-5376-4bfd-9e9d-5dfc1b6f7d3e"
+	},
+	{
+		"Category": "Visualizer",
+		"Permission": "Visualizer Editor",
+		"RoleId": "6a78512a-8c75-4744-ad24-87e6e5847e73"
+	},
+	{
+		"Category": "Secrets Manager",
+		"Permission": "Grant access to secrets",
+		"RoleId": "86895647-efd1-43f2-ab44-3c5d5cc6c5cc"
+	},
+	{
+		"Category": "Secrets Manager",
+		"Permission": "Manage secret groups",
+		"RoleId": "55c51166-ee2a-47a9-8c72-064875838615"
+	},
+	{
+		"Category": "Secrets Manager",
+		"Permission": "Read secrets metadata",
+		"RoleId": "a8b7bd5d-eab2-45fb-800b-88113cc03104"
+	},
+	{
+		"Category": "Secrets Manager",
+		"Permission": "Write secrets",
+		"RoleId": "0c0b7d04-f24f-4dab-ba9d-94e98385092d"
+	}
+]

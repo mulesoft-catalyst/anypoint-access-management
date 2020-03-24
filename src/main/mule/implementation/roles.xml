@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="roles:mainFlow" doc:id="c5ef6b3a-5432-4834-a574-94fd0c75f0e0">
+		<flow-ref doc:name="loginSubFlow" doc:id="37285649-0f52-4711-b823-f1606b758fb2" name="common:loginSubFlow" />
+		<flow-ref doc:name="getOrganizationSubFlow" doc:id="402f8dda-1db7-4c9b-aaf6-4b400bc994db" name="common:getOrganizationSubFlow" />
+		<flow-ref doc:name="getEnvironmentsSubFlow" doc:id="86558a90-1754-469f-8fe2-c64ccd7f58f8" name="roles:getEnvironmentsSubFlow" />
+		<ee:transform doc:name="Set Vars platformRoleIds &amp;  customRoles from Input Files"
+			doc:id="8e0f290b-de36-4e3f-9ed8-a0ff89071e26">
+			<ee:message>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable resource="dwl/roles/set-var-customRoles.dwl" variableName="customRoles" />
+				<ee:set-variable resource="dwl/roles/set-var-platformRoleIds.dwl" variableName="platformRoleIds" />
+			</ee:variables>
+		</ee:transform>
+		<flow-ref doc:name="createRoleAndPemissionsSubFlow" doc:id="5d9058eb-886e-491a-a011-0a6f3e074da9"
+			name="roles:createRoleAndPemissionsSubFlow" />
+		<flow-ref doc:name="logoutSubFlow" doc:id="6ea30eeb-c06c-4cb7-af2a-5fe8f292fd35" name="anypoint-platform:logoutSubFlow" />
+		<set-payload value="#[null]" doc:name="Set Payload to null" doc:id="bd85bbee-f79b-44cf-b650-652c48c16255" />
+	</sub-flow>
+	<sub-flow name="roles:getEnvironmentsSubFlow" doc:id="d89c5204-2a6b-4bf7-a6a0-4d03a8c5d082">
+		<flow-ref doc:name="getEnvironments" doc:id="c8038bdc-2bf1-4ae3-bf78-94dcaf6b191d"
+			name="anypoint-platform:getEnvironmentsSubFlow" />
+		<ee:transform doc:name="Set Var environmentDetails" doc:id="28652678-a6c0-4608-99e6-6b35637ae680">
+			<ee:message />
+			<ee:variables>
+				<ee:set-variable resource="dwl/roles/set-var-prodEnvDtls.dwl" variableName="prodEnvDtls" />
+				<ee:set-variable resource="dwl/roles/set-var-nonProdEnvDtls.dwl" variableName="nonProdEnvDtls" />
+			</ee:variables>
+		</ee:transform>
+	</sub-flow>
+	<sub-flow name="roles:createRoleGroupSubFlow" doc:id="eb89fb65-9691-4572-9e26-2b0cdda119ce">
+		<flow-ref doc:name="createRoleGroup" doc:id="d1b72f4e-660a-4a6f-adc3-921365330290"
+			name="anypoint-platform:createRoleGroupSubFlow" />
+		<ee:transform doc:name="Set Var roleGroupId" doc:id="7bc6db27-20d0-4edc-8608-e3b76f2832cd">
+			<ee:message>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable resource="dwl/roles/set-var-roleGroupId.dwl" variableName="roleGroupId" />
+			</ee:variables>
+		</ee:transform>
+	</sub-flow>
+	<sub-flow name="roles:createRolesSubFlow" doc:id="ea86f86c-a720-456f-852d-bb14d12b05bb">
+		<ee:transform doc:name="Map EnvIds and RoleIds" doc:id="fec8c3c2-db60-43e6-b307-30c05a755d78">
+			<ee:message>
+				<ee:set-payload resource="dwl/roles/set-payload-map-envIds-and-roleIds.dwl" />
+			</ee:message>
+		</ee:transform>
+		<ee:transform doc:name="create roles request" doc:id="c9ba9f1e-87c9-4a0e-8106-e6330cc99483">
+			<ee:message>
+				<ee:set-payload resource="dwl/roles/set-payload-create-roles-request.dwl" />
+			</ee:message>
+		</ee:transform>
+		<flow-ref doc:name="createRoles" doc:id="4c33ef88-4752-4d3d-9f17-cd2865062934" name="anypoint-platform:createRolesSubFlow" />
+	</sub-flow>
+	<sub-flow name="roles:createRoleAndPemissionsSubFlow" doc:id="463cc4a2-e617-42d6-9ac0-4fe0449a2e4b">
+		<ee:transform doc:name="Set Payload to Custom Roles" doc:id="4038c3e8-b99b-4a94-ab12-b9667d0b0804">
+			<ee:message>
+				<ee:set-payload resource="dwl/roles/set-payload-custom-roles.dwl" />
+			</ee:message>
+		</ee:transform>
+		<foreach doc:name="For Each Custom Role" doc:id="d65118da-c7cc-4e96-a5b8-33ce8744092a">
+			<ee:transform doc:name="Set Var currentRole" doc:id="5f077072-aff3-4d09-a3af-bc24399fb6e2">
+				<ee:message>
+				</ee:message>
+				<ee:variables>
+					<ee:set-variable resource="dwl/roles/set-var-currentRole.dwl" variableName="currentRole" />
+				</ee:variables>
+			</ee:transform>
+			<ee:transform doc:name="create roleGroup request" doc:id="ca0c9946-06e8-433d-9c6d-c741e320ecd1">
+				<ee:message>
+					<ee:set-payload resource="dwl/roles/set-payload-create-roleGroup-request.dwl" />
+				</ee:message>
+			</ee:transform>
+			<flow-ref doc:name="createRoleGroupSubFlow" doc:id="83ee862a-ed62-4fb6-8cfd-078c6ad9cedd" name="roles:createRoleGroupSubFlow" />
+			<ee:transform doc:name="Set Var permissions" doc:id="3674cbea-e074-4311-995d-2a1c7426d3d2">
+				<ee:message>
+				</ee:message>
+				<ee:variables>
+					<ee:set-variable resource="dwl/roles/set-variable-permissions.dwl" variableName="permissions" />
+				</ee:variables>
+			</ee:transform>
+			<flow-ref doc:name="createRoles" doc:id="b3e90f2c-daa7-4d86-b6f1-e67e1ef22599" name="roles:createRolesSubFlow" />
+		</foreach>
+	</sub-flow>
+</mule>

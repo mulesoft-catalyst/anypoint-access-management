@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="common:loginSubFlow" doc:id="f1d577cc-96e7-4fa2-8584-c16b2c0e3f1e">
+		<ee:transform doc:name="Set Vars" doc:id="f7a9b1d5-5faa-4934-8563-04b7837b03d2">
+			<ee:message>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable resource="dwl/common/set-var-password.dwl" variableName="password" />
+				<ee:set-variable resource="dwl/common/set-var-organizationName.dwl" variableName="organizationName" />
+				<ee:set-variable resource="dwl/common/set-var-nonProdEnvironments.dwl" variableName="nonProdEnvironments" />
+				<ee:set-variable resource="dwl/common/set-var-prodEnvironments.dwl" variableName="prodEnvironments" />
+				<ee:set-variable resource="dwl/common/set-var-username.dwl" variableName="username" />
+			</ee:variables>
+		</ee:transform>
+		<ee:transform doc:name="Set login Request Payload" doc:id="0326bf48-9b3e-424f-8560-48399c16f3dc">
+			<ee:message>
+				<ee:set-payload resource="dwl/common/set-payload-login-request.dwl" />
+			</ee:message>
+		</ee:transform>
+		<flow-ref doc:name="login" doc:id="6a9a2f51-5943-4607-8dda-3360c6b0d37b" name="anypoint-platform:loginSubFlow" />
+		<ee:transform doc:name="Set Var authorizationToken" doc:id="7b7e2cd4-4b6f-41a9-b501-0445c826a61c">
+			<ee:message>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable resource="dwl/common/set-var-authorizationToken.dwl" variableName="authorizationToken" />
+			</ee:variables>
+		</ee:transform>
+	</sub-flow>
+	<sub-flow name="common:getOrganizationSubFlow" doc:id="04a6ec01-75ee-4d65-b1da-7fa37cd887d7">
+		<flow-ref doc:name="getOrganization" doc:id="438960b1-5a3f-4718-b461-1650dd5c2cf0"
+			name="anypoint-platform:getOrganizationSubFlow" />
+		<ee:transform doc:name="Set Var orgId" doc:id="0759327a-9c02-4ce7-886b-de0da34757cd">
+			<ee:message>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable resource="dwl/common/set-var-orgId.dwl" variableName="orgId" />
+			</ee:variables>
+		</ee:transform>
+	</sub-flow>
+</mule>
