@@ -1,4 +1,9 @@
 [
+    {
+		"Category": "API Manager",
+		"Permission": "API Group Administrator",
+		"RoleId": "821d84e6-ee22-4646-bf25-5461d49c9690"
+	},
 	{
 		"Category": "API Manager",
 		"Permission": "API Manager Environment Administrator",
@@ -135,6 +140,11 @@
 		"RoleId": "8b7caaba-e94a-11e4-b02c-1681e6b88ec1"
 	},
 	{
+		"Category": "Runtime Manager",
+		"Permission": "Manage Application Flows",
+		"RoleId": "6c017fac-1311-11eb-adc1-0242ac120002"
+	},
+	{
 		"Category": "Design Center",
 		"Permission": "Design Center Developer",
 		"RoleId": "861c23bb-c3e0-4ab9-b6b4-db2325a1bb1d"
@@ -168,5 +178,50 @@
 		"Category": "Secrets Manager",
 		"Permission": "Write secrets",
 		"RoleId": "0c0b7d04-f24f-4dab-ba9d-94e98385092d"
+	},
+	{
+		"Category": "MQ",
+		"Permission": "Clear destinations",
+		"RoleId": "3b06e69d-e225-4355-92c4-0a2b9dcefa0f"
+	},
+	{
+		"Category": "MQ",
+		"Permission": "Manage clients",
+		"RoleId": "f5a82711-c675-452d-831a-1b68903655ec"
+	},
+	{
+		"Category": "MQ",
+		"Permission": "Manage destinations",
+		"RoleId": "adb4d105-0047-404b-8743-99fe01626494"
+	},
+	{
+		"Category": "MQ",
+		"Permission": "View clients",
+		"RoleId": "5d583944-5f2a-427e-9a30-9e17dc7e0a07"
+	},
+	{
+		"Category": "MQ",
+		"Permission": "View destinations",
+		"RoleId": "03f810ce-6dd9-43e3-a2b7-5c38d5038fb3"
+	},
+	{
+		"Category": "Tokenization",
+		"Permission": "Manage Tokenization Formats",
+		"RoleId": "29ce5788-22f8-4efb-9f71-39d648f4321e"
+	},
+	{
+		"Category": "Tokenization",
+		"Permission": "Manage Tokenization Services",
+		"RoleId": "6018b999-fa59-4c51-b4ab-1a0c81dd40da"
+	},
+	{
+		"Category": "Data Gateway",
+		"Permission": "Data Gateway Administrator",
+		"RoleId": "c5d2fb7f-f19b-4adb-acb6-b1699124356b"
+	},
+	{
+		"Category": "Data Gateway",
+		"Permission": "Data Gateway Viewer",
+		"RoleId": "1b6f67bc-62d9-400a-a416-08bc85b474fd"
 	}
 ]
