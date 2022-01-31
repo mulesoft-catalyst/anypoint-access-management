@@ -151,7 +151,12 @@
 	},
 	{
 		"Category": "Anypoint Monitoring",
-		"Permission": "Anypoint Monitoring User",
+		"Permission": "Monitoring Viewer",
+		"RoleId": "30db5b8c-933b-11eb-a8b3-0242ac130003"
+	},
+	{
+		"Category": "Anypoint Monitoring",
+		"Permission": "Monitoring Administrator",
 		"RoleId": "8f77b09c-5376-4bfd-9e9d-5dfc1b6f7d3e"
 	},
 	{
